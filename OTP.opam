@@ -2,15 +2,19 @@
 opam-version: "2.0"
 name : "OTP"
 version : "0.1"
-synopsis: "A short synopsis"
-description: "A longer description"
-maintainer: ["Maintainer Name <maintainer@example.com>"]
-authors: ["Author Name <author@example.com>"]
-license: "LICENSE"
-tags: ["add topics" "to describe" "your" "project"]
-homepage: "https://github.com/username/reponame"
-doc: "https://url/to/documentation"
-bug-reports: "https://github.com/username/reponame/issues"
+synopsis: "Time-base One Time Password (OTP) based on RFC6238 with an HMAC-SHA1 algorithm and a 6 digits code in OCAML"
+description: "It relies on the Cryptokit library for cryptography operations, as well as the Base32 
+               library for base32 encoding. The library generate a QR Code with the qrc library. It is 
+               tested against all test vectors provided in RFC 6238 and the test suite provides as well 
+               a dynamic test which requires the use of an client authenticator (like Google Authenticator 
+               or Microsoft Authenticator) as a final test."
+maintainer: ["Heyji2 <heyji2@github.com>"]
+authors: ["Heyji2 <heyji2@github.com>"]
+license: "GPL-3.0-only"
+tags: ["OTP" "TOTP" "HMAC-SHA1" "One Time Password"]
+homepage: "https://github.com/Heyji2/OTP"
+doc: "https://heyji2.github.io"
+bug-reports: "https://github.com/Heyji2/OTP/issues"
 depends: [
   "dune" {>= "3.18"}
   "ocaml"
@@ -33,5 +37,5 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/username/reponame.git"
+dev-repo: "git+https://github.com/Heyji2/OTP.git"
 x-maintenance-intent: ["(latest)"]

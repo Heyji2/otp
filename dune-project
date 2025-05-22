@@ -5,22 +5,26 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github Heyji2/OTP))
 
-(authors "Author Name <author@example.com>")
+(authors "Heyji2 <heyji2@github.com>")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
+(maintainers "Heyji2 <heyji2@github.com>")
 
-(license LICENSE)
+(license GPL-3.0-only)
 
-(documentation https://url/to/documentation)
+(documentation https://heyji2.github.io)
 
 (package
  (name OTP)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "Time-base One Time Password (OTP) based on RFC6238 with an HMAC-SHA1 algorithm and a 6 digits code in OCAML")
+ (description "It relies on the Cryptokit library for cryptography operations, as well as the Base32 
+               library for base32 encoding. The library generate a QR Code with the qrc library. It is 
+               tested against all test vectors provided in RFC 6238 and the test suite provides as well 
+               a dynamic test which requires the use of an client authenticator (like Google Authenticator 
+               or Microsoft Authenticator) as a final test.")
  (depends ocaml)
  (tags
-  ("add topics" "to describe" your project)))
+  ("OTP" "TOTP" "HMAC-SHA1" "One Time Password")))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
