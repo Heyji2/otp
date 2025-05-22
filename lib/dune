@@ -1,0 +1,10 @@
+(library
+ (public_name OTP)
+ (libraries cryptokit base32 unix qrc stdint)
+ (name OTP))
+
+(env
+ (dev
+  (flags (:standard -w +42 -warn-error -32 -warn-error -33) ))
+  (release
+  (ocamlopt_flags (:standard -O3))))

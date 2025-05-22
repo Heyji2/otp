@@ -1,0 +1,12 @@
+(test
+ (libraries hex OTP ounit2)
+ (name test_OTP))
+
+(env
+ (dev
+  (flags (:standard -w +42 -warn-error -32 -warn-error -33) )
+ )
+ (release
+  (ocamlopt_flags (:standard -O3))
+ )
+)
