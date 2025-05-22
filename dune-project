@@ -1,7 +1,7 @@
 (lang dune 3.18)
 
 (name OTP)
-(version %%VERSION%%)
+(version "0.1")
 
 (generate_opam_files true)
 
