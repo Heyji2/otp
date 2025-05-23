@@ -6,7 +6,7 @@
 (generate_opam_files true)
 
 (source
- (github Heyji2/OTP))
+ (github Heyji2/otp))
 
 (authors "Heyji2 <heyji2@github.com>")
 
