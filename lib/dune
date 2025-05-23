@@ -1,7 +1,7 @@
 (library
- (public_name OTP)
+ (public_name otp)
  (libraries cryptokit base32 unix qrc stdint)
- (name OTP))
+ (name otp))
 
 (env
  (dev

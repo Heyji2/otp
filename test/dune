@@ -1,5 +1,5 @@
 (test
- (libraries hex OTP ounit2)
+ (libraries hex otp ounit2)
  (name test_OTP))
 
 (env

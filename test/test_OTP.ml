@@ -1,9 +1,4 @@
-(**
-   NAME : OTP
-   VERSION : 6f7fc7f-dirty 
-   AUTHOR : Heyji2 <heyji2@github.com>
-*)
-open OTP
+open Otp
 open OUnit2
 
 (* hex string to byte string 
@@ -25,7 +20,7 @@ let str2hstr s =
   data   : "Hi There" 
   result : "b617318655057264e28bc0b6fb378c8ef146be00" *)
 let test_hmac_sha1 key data output ctxt = 
-  let hmac = Otp.Core.hmac_sha1 key (Otp.Counter (String.to_bytes data)) in 
+  let hmac = Core.hmac_sha1 key (Counter (String.to_bytes data)) in 
   let hmac_b = String.to_bytes hmac in 
   assert_equal ~ctxt:ctxt ~cmp:(fun a b -> (String.compare a b)=0) ~printer:(fun x -> x) output (bstr2hstr hmac_b)  
 
@@ -39,8 +34,8 @@ let test_totp time digits ctxt =
 
 let test_authenticator ctxt = 
   let rng = Cryptokit.Random.secure_rng in 
-  let s = Otp.generate_secret rng in 
-  let v = Otp.generate_totp_uri "Test_totp" s "CADAL" in 
+  let s = generate_secret rng in 
+  let v = generate_totp_uri "Test_totp" s "CADAL" in 
   let file = open_out "test.html" in 
   let fmt = Format.formatter_of_out_channel file in 
   let () = Format.fprintf fmt "<html><head></head><body><h1>TOTP QRCode</h1>%s</body></html>" (Otp.uri2qrcode v) in 
@@ -52,8 +47,8 @@ let test_authenticator ctxt =
     print_endline "Erreur, le code doit avoir 6 caractères" 
   else 
     let digits = Int32.to_int (Int32.of_string code) in  
-    let c = Otp.totp_counter () in 
-    let r = Otp.verify s c digits in
+    let c = totp_counter () in 
+    let r = verify s c digits in
     let () = assert_equal 
         ~ctxt:    ctxt 
         ~cmp:    (fun r1 r2 -> match (r1,r2) with 

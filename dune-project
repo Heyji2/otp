@@ -1,6 +1,6 @@
 (lang dune 3.18)
 
-(name OTP)
+(name otp)
 (version "0.1")
 
 (generate_opam_files true)
@@ -17,7 +17,7 @@
 (documentation https://heyji2.github.io)
 
 (package
- (name OTP)
+ (name otp)
  (synopsis "Time-base One Time Password (OTP) based on RFC6238 with an HMAC-SHA1 algorithm and a 6 digits code in OCAML")
  (description "It relies on the Cryptokit library for cryptography operations, as well as the Base32 
                library for base32 encoding. The library generate a QR Code with the qrc library. It is 
