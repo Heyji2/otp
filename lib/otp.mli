@@ -15,6 +15,7 @@
     ## Registration 
     On the server side : 
     
+    ```
     let rng = Cryptokit.Random.secure_rng in             create a random generator                                                            
     let s = generate_secret rng in                       generate a secret                                                                    
     let u = generate_totp_uri "MyWebSite" s "Michel" in  embeds this secret into a specificaly crafted URI that authenticators can understand 
@@ -31,11 +32,13 @@
     let () = Format.pp_print_flush fmt () in 
     let () = close_out file in 
     let () = print_endline "\nOpen the file test.html and scann the QRCode with a client OTP (like Microsoft Authenticator)" 
+    ```
     
 
     ## Authentication 
     Then for the authentication : 
     
+    ```
     print_endline "Enter the six digit code to authenticate Michel on MyWebSite"
     let code = read_line () in 
     if ((String.length code) != 6) then 
@@ -47,7 +50,7 @@
       match r with 
       |   Result.Error e -> print_endline e 
       |   Result.Ok resync -> Printf.printf "The code is good, Michel is authenticated on MyWebSite. Number of unsynchronised steps : %d" resync 
-    
+    ```
 *)
 
 open Stdint
