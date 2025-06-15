@@ -1,4 +1,4 @@
-This library implements the Time-based One Time Password RFC 6238 with an HMAC-SHA1 algorithm and a 6 digits code. 
+This OCaml library implements the Time-based One Time Password RFC 6238 with an HMAC-SHA1 algorithm and a 6 digits code. 
 It relies on the Cryptokit library for cryptography operations, as well as the Base32 library for base32 encoding. 
 The library generate a QR Code with the qrc library.
 It is tested against all test vectors provided in RFC 6238 and the test suite provides as well a dynamic test 
