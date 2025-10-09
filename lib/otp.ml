@@ -118,7 +118,8 @@ let check s c d =
 let rec verify ?(threshold=seuil_synchro) s c d = 
   match threshold with
   | 0 ->  Result.Error "Invalid code"  
-  | _ ->  if (check s c d) then (Result.Ok (seuil_synchro - threshold)) 
+  | _ ->  if ( d < 6 || d > 8) then Result.Error "Invalid code" else 
+          if (check s c d) then (Result.Ok (seuil_synchro - threshold)) 
           else verify ~threshold:(threshold-1) s (Core.increment c) d 
 
 (* Génère une uri au format clé pour les clients authenticator. 
