@@ -35,16 +35,16 @@ let test_totp time digits ctxt =
 let test_authenticator ctxt = 
   let rng = Cryptokit.Random.secure_rng in 
   let s = generate_secret rng in 
-  let v = generate_totp_uri "Test_totp" s "CADAL" in 
+  let v = generate_totp_uri "Test_totp" s "www.test.totp" in 
   let file = open_out "test.html" in 
   let fmt = Format.formatter_of_out_channel file in 
   let () = Format.fprintf fmt "<html><head></head><body><h1>TOTP QRCode</h1>%s</body></html>" (Otp.uri2qrcode v) in 
   let () = Format.pp_print_flush fmt () in 
   let () = close_out file in 
-  let () = print_endline "\nScannez le QRCode se trouve dans le fichier test.html avec un client OTP (type Microsoft Authenticator) et entrez le code totp pour CADAL : " in
+  let () = print_endline "\nOpen test.html and scann the QRCode with an OTP client (like Microsoft Authenticator) and enter the totp code for www.test.totp : " in
   let code = read_line () in 
   if ((String.length code) != 6) then 
-    print_endline "Erreur, le code doit avoir 6 caractères" 
+    print_endline "Error, code must have 6 and only six characters" 
   else 
     let digits = Int32.to_int (Int32.of_string code) in  
     let c = totp_counter () in 
@@ -63,7 +63,7 @@ let test_authenticator ctxt =
       in 
     match r with 
     | Result.Error e -> print_endline e 
-    | Result.Ok resync -> Printf.printf "Code validé. Nombre de step desynchronisés : %d" resync  
+    | Result.Ok resync -> Printf.printf "Valid code. Drift : %d steps" resync  
 
 let suite = 
   "otp suite">:::

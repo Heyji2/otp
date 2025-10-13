@@ -1,7 +1,7 @@
 (**
     This library implements the Time-based One Time Password RFC 6238 with an HMAC-SHA1 algorithm and a 6 digits code. 
     It relies on the Cryptokit library for cryptography operations, as well as the Base32 library for base32 encoding. 
-    The library generate a QR Code with the qrc library.
+    The library generates a QR Code with the qrc library.
     It is tested against all test vectors provided in RFC 6238 and the test suite provides as well a dynamic test 
     which requires the use of an client authenticator (like Google Authenticator or Microsoft Authenticator) as a final
     test. 
@@ -49,7 +49,7 @@
       let r = verify s c digits in
       match r with 
       |   Result.Error e -> print_endline e 
-      |   Result.Ok resync -> Printf.printf "The code is good, Michel is authenticated on MyWebSite. Number of unsynchronised steps : %d" resync 
+      |   Result.Ok resync -> Printf.printf "The code is good, Michel is authenticated on MyWebSite. Drift : %d steps" resync 
     ```
 *)
 
@@ -58,7 +58,7 @@ type counter = Counter of bytes
 
 val generate_secret : ?nb_bits:int -> Cryptokit.Random.rng -> string
 (**
-    Generate a random string of nb_bits bits. If nb_bits is not a multiple of 8, the length of the
+    Generates a random string of nb_bits bits. If nb_bits is not a multiple of 8, the length of the
     string is rounded to the nearest integer toward 0. 
     nb_bits : number of bits of the generated secrets. Default to 160 bits. Must be a multiple of 8
     rng     : a random generator, as for instance, provided by Cryptokit.Randome.secure_rng 
@@ -67,18 +67,18 @@ val generate_secret : ?nb_bits:int -> Cryptokit.Random.rng -> string
 val generate_totp_uri : ?algo:string -> ?nb_digits:int -> ?period:uint64 -> string -> string -> string -> string
 (**
     [generate_totp_uri algo nb_digits period label secret issuer]
-    generates an uri following the {{: https://github.com/google/google-authenticator/wiki/Key-Uri-Format} Key Uri Format}
+    Generates an uri following the {{: https://github.com/google/google-authenticator/wiki/Key-Uri-Format} Key Uri Format}
     @param algo Only support SHA1 (as most of authenticator clients) which is the default
     @param nb_digits Number of digits of the generated one-time-password. The default is 6 digits
     @param period The time step equivalent of the counter increment in second. Default value is 30 seconds, as in most authenticator clients. Refered to as "X" in the RFC 6238.  
-    @param label A name of the account the client with register an OTP for. 
+    @param label A name for the client's account which registers an OTP for. 
     @param secret The secret to be shared with the authenticator client. 
     @param issuer The name of the issuer of the OTP. (e.g. the name of the website)
  *)
  
 val totp_counter : ?period:uint64 -> ?t0:uint64 -> ?drift:uint64 -> unit -> counter
 (**
-   Generate a counter to be used in the time-based one time password procedure 
+   Generates a counter to be used in the time-based one time password procedure 
    with a secret to {!verify} a given code. The counter can also be incremented 
    using the function {!Core.increment}. 
    @param period The time step equivalent of the counter increment in seconds. Default 
@@ -97,7 +97,7 @@ val totp_counter : ?period:uint64 -> ?t0:uint64 -> ?drift:uint64 -> unit -> coun
 val verify : ?threshold:int -> string -> counter -> int -> (int,string) result
 (**
    [verify threshold secret counter digits] verifies that the digits are correct 
-   given the secret and the counter by computing the digits and comparing them with 
+   given the secret and the counter, by computing the digits and comparing them with 
    the one provided.
    @param threshold Synchronization threshold corresponding to the maximum number of 
    successive increments and verifications tried until concluding the digits are 
@@ -108,7 +108,7 @@ val verify : ?threshold:int -> string -> counter -> int -> (int,string) result
    [totp_counter] function. 
    @param digits The digits to be verified, provided by the authenticator client. 
    @return {!Result.Ok} with an integer mentioning the number of successive 
-   increments of the counter that have been needed to validate the digits.
+   increments of the counter that have been needed to validate the digits (drift).
    This number must be less then {!seuil_synchro}. Should not be more than 
    2 for well synchronised clocks and no latency on the network. {!Result.Error} 
    otherwise with a message indicating "Invalid code".  
@@ -117,7 +117,7 @@ val verify : ?threshold:int -> string -> counter -> int -> (int,string) result
 
 val uri2qrcode : string -> string
 (**
-   Transform an uri provided by {!generate_totp_uri} into a 50x50 mm2 qrcode
+   Transforms an uri provided by {!generate_totp_uri} into a 50x50 mm2 qrcode
    embedded into an html svg element (container) that can be imported into
    any html page. 
 
@@ -145,19 +145,19 @@ module Core : sig
 
 val increment : counter -> counter
 (**
-   Increment a counter by one step.
+   Increments a counter by one step.
  *)
 
 val hmac_sha1 : string -> counter -> string
 (**
-  Compute the hashed message authentication code given a 
+  Computes the hashed message authentication code given a 
   secret (string) and a counter, according to RFC 2104.
   Validated with RFC 2202 tests vectors. 
  *)
 
 val dynamic_truncation : string -> int -> int 
 (**
-  Compute the dynamic truncation function mentioned in 
+  Computes the dynamic truncation function mentioned in 
   RFC4226. The function has been tested with the example
   given in section 5.4.  
   @param 1 HS = HMAC-SHA1(key,counter) as described in section 5.3
@@ -168,7 +168,7 @@ val dynamic_truncation : string -> int -> int
 
 val hotp : ?nb_digits:int -> string -> counter -> int
 (**
- Compute the HMAC from the number of digits, the shared secret and the counter. 
+ Computes the HMAC from the number of digits, the shared secret and the counter. 
  This is a combination of the [hmac_sha1] followed by [dynamic_truncation] functions.
  @param nb_digits Number of digits of the HMAC. 
  @param : The shared secret

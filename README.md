@@ -18,7 +18,7 @@ On the server side :
 let rng = Cryptokit.Random.secure_rng in             (* create a random generator                                                            *)
 let s = generate_secret rng in                       (* generate a secret                                                                    *)
 let u = generate_totp_uri "MyWebSite" s "Michel" in  (* embeds this secret into a specificaly crafted URI that authenticators can understand *)
-let qr = Otp.uri2qrcode u in                         (* transform this URI into a QRCode that can be display in an html page                 *)
+let qr = Otp.uri2qrcode u in                         (* transform this URI into a QRCode that can be displayed in an html page               *)
 let file = open_out "test.html" in 
 let fmt = Format.formatter_of_out_channel file in 
 let () = Format.fprintf fmt 
