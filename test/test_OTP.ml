@@ -100,7 +100,7 @@ let suite =
       "totp test 4">:: test_totp 1234567890  89005924;
       "totp test 5">:: test_totp 2000000000  69279037;
       "totp test 6">:: test_totp 20000000000 65353130;
-      "authenticator test 1">:: test_authenticator;
+      (*"authenticator test 1">:: test_authenticator;*) (* <= dynamic test that cannot be included into a test suite. But you can run it on your own to see how it works *)
     ]
 
 
