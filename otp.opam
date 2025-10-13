@@ -20,6 +20,10 @@ depends: [
   "dune" {>= "3.18"}
   "ocaml"
   "odoc" {with-doc}
+  "cryptokit"
+  "base32"
+  "qrc"
+  "stdint"
 ]
 build: [
   ["dune" "subst"] {dev}
