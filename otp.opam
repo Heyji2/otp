@@ -17,7 +17,7 @@ homepage: "https://github.com/Heyji2/otp"
 doc: "https://heyji2.github.io"
 bug-reports: "https://github.com/Heyji2/otp/issues"
 depends: [
-  "dune" {>= "3.18"}
+  "dune" {>= "4.13"}
   "ocaml"
   "odoc" {with-doc}
   "cryptokit"
