@@ -24,8 +24,8 @@ let test_hmac_sha1 key data output ctxt =
   let hmac_b = String.to_bytes hmac in 
   assert_equal ~ctxt:ctxt ~cmp:(fun a b -> (String.compare a b)=0) ~printer:(fun x -> x) output (bstr2hstr hmac_b)  
 
-let test_totp (time:int64) digits ctxt = 
-  let t = Stdint.Uint64.sub (Stdint.Uint64.of_float @@ Float.trunc @@ (Unix.time ())) (Stdint.Uint64.of_int64 time) in 
+let test_totp time digits ctxt = 
+  let t = Stdint.Uint64.of_int ((Float.to_int @@ Float.trunc @@ (Unix.time ()))-time) in 
   let c = Otp.totp_counter ~t0:t ~drift:Stdint.Uint64.zero () in 
   let k = "12345678901234567890" in 
   let hmac = Otp.Core.hmac_sha1 k c in  
@@ -94,7 +94,7 @@ let suite =
       "hmac sha1 test 9">:: test_hmac_sha1 (hstr2bstr (String.concat "" (List.init 80 (fun _ -> "aa"))))
                                           "Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"
                                           "e8e99d0f45237d786d6bbaa7965c7808bbff1a91";
-      "totp test 1">:: test_totp 59L          94287082; 
+      "totp test 1">:: test_totp 59          94287082; 
       "totp test 2">:: test_totp 1111111109L  07081804;
       "totp test 3">:: test_totp 1111111111L  14050471;
       "totp test 4">:: test_totp 1234567890L  89005924;
