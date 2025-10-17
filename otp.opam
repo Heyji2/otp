@@ -27,7 +27,7 @@ depends: [
   "qrc"
   "stdint"
   "topkg" {build}
-  "ocamlfine" {build}
+  "ocamlfind" {build}
   "conf-gmp" {>= "5"}
 ]
 build: [
