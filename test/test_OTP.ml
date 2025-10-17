@@ -95,11 +95,11 @@ let suite =
                                           "Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"
                                           "e8e99d0f45237d786d6bbaa7965c7808bbff1a91";
       "totp test 1">:: test_totp 59          94287082; 
-      "totp test 2">:: test_totp 1111111109  07081804;
-      "totp test 3">:: test_totp 1111111111  14050471;
-      "totp test 4">:: test_totp 1234567890  89005924;
-      "totp test 5">:: test_totp 2000000000  69279037;
-      "totp test 6">:: test_totp 20000000000 65353130;
+      "totp test 2">:: test_totp 1111111109L  07081804;
+      "totp test 3">:: test_totp 1111111111L  14050471;
+      "totp test 4">:: test_totp 1234567890L  89005924;
+      "totp test 5">:: test_totp 2000000000L  69279037;
+      "totp test 6">:: test_totp 20000000000L 65353130;
       (*"authenticator test 1">:: test_authenticator;*) (* <= dynamic test that cannot be included into a test suite. But you can run it on your own to see how it works *)
     ]
 

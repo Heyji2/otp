@@ -29,6 +29,7 @@ depends: [
   "topkg" {build}
   "ocamlfind" {build}
   "conf-gmp" {>= "5"}
+  "conf-gmp-powm-sec" {>= "2"}
 ]
 build: [
   ["dune" "subst"] {dev}
