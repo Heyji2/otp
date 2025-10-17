@@ -27,6 +27,7 @@ depends: [
   "qrc"
   "stdint"
   "topkg" {build}
+  "conf-gmp" {>= "2"}
 ]
 build: [
   ["dune" "subst"] {dev}
