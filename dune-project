@@ -25,7 +25,21 @@
  a dynamic test which requires the use of an client authenticator (like Google Authenticator 
  or Microsoft Authenticator) as a final test.")
 
- (depends ocaml)
+ (depends 
+   (dune (>=3.18))
+   (ocaml (>=4.13))
+   (odoc :with-doc)
+   cryptokit
+   base32
+   ounit2
+   hex
+   qrc
+   stdint
+   (topkg :build)
+   (ocamlfind :build)
+   (conf-gmp (>=5))
+   (conf-gmp-powm-sec (>=2))
+ )
  (tags
   ("OTP" "TOTP" "HMAC-SHA1" "One Time Password")))
 
