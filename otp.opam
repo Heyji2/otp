@@ -18,7 +18,7 @@ doc: "https://heyji2.github.io"
 bug-reports: "https://github.com/Heyji2/otp/issues"
 depends: [
   "dune" {>= "3.18"}
-  "ocaml"{>= "4.13"}
+  "ocaml" {>= "4.13"}
   "odoc" {with-doc}
   "cryptokit"
   "base32"

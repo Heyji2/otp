@@ -1,7 +1,7 @@
 (lang dune 3.18)
 
 (name otp)
-(version "0.1")
+(version "0.2")
 
 (generate_opam_files true)
 
@@ -26,8 +26,8 @@
  or Microsoft Authenticator) as a final test.")
 
  (depends 
-   (dune (>=3.18))
-   (ocaml (>=4.13))
+   dune
+   (ocaml (>= 4.13))
    (odoc :with-doc)
    cryptokit
    base32
@@ -37,8 +37,8 @@
    stdint
    (topkg :build)
    (ocamlfind :build)
-   (conf-gmp (>=5))
-   (conf-gmp-powm-sec (>=2))
+   (conf-gmp (>= 5))
+   (conf-gmp-powm-sec (>= 2))
  )
  (tags
   ("OTP" "TOTP" "HMAC-SHA1" "One Time Password")))
