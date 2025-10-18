@@ -35,7 +35,6 @@
    hex
    qrc
    stdint
-   (topkg (= 1.0.8))
    (ocamlfind :build)
    (conf-gmp (>= 5))
    (conf-gmp-powm-sec (>= 2))
