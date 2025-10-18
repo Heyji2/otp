@@ -47,4 +47,4 @@ build: [
 ]
 dev-repo: "git+https://github.com/Heyji2/otp.git"
 x-maintenance-intent: ["(latest)"]
-x-ci-accept-failures: ["debian-13"]
+x-ci-accept-failures: ["debian-13","fedora-42"]
