@@ -26,7 +26,6 @@ depends: [
   "hex"
   "qrc"
   "stdint"
-  "topkg" {os != "win32" & build}
   "ocamlfind" {build}
   "conf-gmp" {>= "5"}
   "conf-gmp-powm-sec" {>= "2"}

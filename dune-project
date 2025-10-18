@@ -35,7 +35,6 @@
    hex
    qrc
    stdint
-   (topkg (and (<> :os "win32") :build))
    (ocamlfind :build)
    (conf-gmp (>= 5))
    (conf-gmp-powm-sec (>= 2))
