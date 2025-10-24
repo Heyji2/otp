@@ -43,27 +43,24 @@ let test_authenticator ctxt =
   let () = close_out file in 
   let () = print_endline "\nOpen test.html and scann the QRCode with an OTP client (like Microsoft Authenticator) and enter the totp code for www.test.totp : " in
   let code = read_line () in 
-  if ((String.length code) != 6) then 
-    print_endline "Error, code must have 6 and only six characters" 
-  else 
-    let digits = Int32.to_int (Int32.of_string code) in  
-    let c = totp_counter () in 
-    let r = verify s c digits in
-    let () = assert_equal 
-        ~ctxt:    ctxt 
-        ~cmp:    (fun r1 r2 -> match (r1,r2) with 
-                               | Result.Ok _, Result.Ok _ -> true 
-                               | _ -> false ) 
-        ~printer:(fun x -> match x with 
-                           | Result.Error e -> e 
-                           | Result.Ok d -> string_of_int d) 
-        r
-        (Result.Ok digits) 
-         
-      in 
-    match r with 
-    | Result.Error e -> print_endline e 
-    | Result.Ok resync -> Printf.printf "Valid code. Drift : %d steps" resync  
+  let digits = Int32.to_int (Int32.of_string code) in  
+  let c = totp_counter () in 
+  let r = verify s c digits in
+  let () = assert_equal 
+      ~ctxt:    ctxt 
+      ~cmp:    (fun r1 r2 -> match (r1,r2) with 
+                             | Result.Ok _, Result.Ok _ -> true 
+                              | _ -> false ) 
+      ~printer:(fun x -> match x with 
+                         | Result.Error e -> e 
+                         | Result.Ok d -> string_of_int d) 
+      r
+      (Result.Ok digits) 
+      
+    in 
+  match r with 
+  | Result.Error e -> print_endline e 
+  | Result.Ok resync -> Printf.printf "Valid code. Drift : %d steps" resync  
 
 let suite = 
   "otp suite">:::
@@ -100,7 +97,7 @@ let suite =
       "totp test 4">:: test_totp 1234567890L  89005924;
       "totp test 5">:: test_totp 2000000000L  69279037;
       "totp test 6">:: test_totp 20000000000L 65353130;
-      (*"authenticator test 1">:: test_authenticator;*) (* <= dynamic test that cannot be included into a test suite. But you can run it on your own to see how it works *)
+      (*"authenticator test 1">:: test_authenticator;*) (* <= dynamic test that cannot be included into a test suite. But you can run it on your own to see how it works. If so, don't run it from dune but directly by colling the executable otherwise dune will forward stdin *)
     ]
 
 

@@ -117,8 +117,8 @@ let check s c d =
 *)
 let rec verify ?(threshold=seuil_synchro) s c d = 
   match threshold with
-  | 0 ->  Result.Error "Invalid code"  
-  | _ ->  if ( d < 6 || d > 8) then Result.Error "Invalid code" else 
+  | 0 ->  Result.Error "Invalid threshold"  
+  | _ ->  if ( d < 100000 || d > 99999999) then Result.Error "Invalid number of digits in the code. Must be 6, 7 or 8 digits" else 
           if (check s c d) then (Result.Ok (seuil_synchro - threshold)) 
           else verify ~threshold:(threshold-1) s (Core.increment c) d 
 
