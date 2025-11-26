@@ -19,6 +19,7 @@ bug-reports: "https://github.com/Heyji2/otp/issues"
 url {
   src: "https://github.com/Heyji2/otp/archive/refs/tags/0.2.tar.gz"
   checksum: [
+    "md5=10e7e9ec1c962298e78e9c3bb2445b59"
     "sha256=b210ef2ca1bc332fd3e873c6a8b81d18b3a70f491b191c42d7931a8adf7c0e51"
   ]
 }
