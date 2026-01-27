@@ -14,7 +14,7 @@ There are two phases to setup an OTP :
 ## Registration 
 On the server side : 
     
-```
+```ocaml
 let rng = Cryptokit.Random.secure_rng in             (* create a random generator                                                            *)
 let s = generate_secret rng in                       (* generate a secret                                                                    *)
 let u = generate_totp_uri "MyWebSite" s "Michel" in  (* embeds this secret into a specificaly crafted URI that authenticators can understand *)
@@ -37,7 +37,7 @@ let () = print_endline "\nOpen the file test.html and scann the QRCode with a cl
 ## Authentication 
 Then for the authentication : 
     
-```
+```ocaml
 print_endline "Enter the six digit code to authenticate Michel on MyWebSite"
 let code = read_line () in 
 if ((String.length code) != 6) then 
